@@ -1,0 +1,39 @@
+application:
+    name: Retailer System
+
+server:
+    port: 8888
+    #ssl:
+    #    key-store: keystore.p12
+    #    key-store-password: password
+    #    keyStoreType: PKCS12
+    #    keyAlias: tomcat
+        
+logging:
+  file: logs/retailer-system.log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    org.springframework.web: INFO
+    guru.springframework.controllers: INFO
+    org.hibernate: INFO
+    com.nokia.gdc.*: DEBUG
+                     
+# keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+
+spring:
+    datasource:
+        driverClassName: org.h2.Driver
+        url: jdbc:h2:file:./retailer.h2;FILE_LOCK=FS
+        username: sa
+        password: 
+    jpa:
+        hibernate:
+            ddl-auto: update
+            show-sql: true
+            dialect: org.hibernate.dialect.H2Dialect
+    mvc:
+        view:
+            preffix: /WEB-INF/jsp
+            suffix: .jsp
